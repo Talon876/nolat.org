@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang='en'>
+  <head>
+    <title>{{ resource.meta.title }}</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+    <link rel='stylesheet' href='{{ media_url('css/bijou.css') }}'>
+    <link rel='stylesheet' href='{{ media_url('css/style.css') }}'>
+    {% include "analytics.j2" %}
+  </head>
+  <body>
+    <div class='navbar fixed'>
+      <div class='container'>
+        <a href='/'><h4 class='title pull-left'>{{ site.meta.title }}</h4></a>
+        <ul class='navlocs pull-right'>
+          {% set navigation_bar = [('/', 'home', 'Home'),
+          ('/projects', 'projects', 'Projects'),
+          ('/blog', 'blog', 'Blog'),
+          ('https://github.com/Talon876', 'github', 'GitHub')] -%}
+          {% for href, id, display in navigation_bar %}
+            <li><a{% if id == resource.meta.active %} class='selected'{% endif %} href='{{ href }}'>{{ display }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class='container'>
+      {% block content %}
+      {% endblock content %}
+    </div>
+  </body>
+</html>
